@@ -3,7 +3,7 @@ const productController = require('../controllers/products.js');
 const validate = require('express-validation');
 
 
-exports.load = function(app) {
+exports.load = (app) => {
     app.post('/api/v1/products', validate(productValidation.createProduct()), productController.createProduct);
     app.delete('/api/v1/products/:id', validate(productValidation.deleteProduct()), productController.deleteProduct);
     app.get('/api/v1/products/:id', validate(productValidation.getProduct()), productController.getProduct);

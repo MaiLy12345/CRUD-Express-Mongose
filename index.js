@@ -10,8 +10,9 @@ app.use(bodyParser.json());
 
 models
 .connectDB()
-.then(console.log('connect db OK'))
+.then(console.log('Connect db OK'))
 .catch(function (e) {
+    console.error('Connect Err');
     console.error(e);
     process.exit(1);
 });

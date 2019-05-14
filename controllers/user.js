@@ -1,5 +1,3 @@
-const path = require('path');
-const fs = require('fs');
 const { ObjectId } = require('mongodb');
 const User = require('../models/user.js');
 
@@ -8,10 +6,10 @@ const deleteUser = async (req, res, next) => {
         const { id } = req.params;
         const userDelete = await User.findOneAndDelete({_id: ObjectId(id)});
         if (!userDelete) {
-            return next(new Error('user_not_found'));
+            return next(new Error('User not found'));
         }
         return res.status(200).json({
-            message : 'delete user successful',
+            message : 'Del user successful',
             data: userDelete
         });
     } catch (e) {
@@ -24,7 +22,7 @@ const addUser = async (req, res, next) => {
         const { username, password} = req.body;
         const existedUser = await User.findOne({username});
         if (existedUser) {
-            return next(new Error('username_already_exists'));
+            return next(new Error('Username already exists'));
         } 
         const newUser = new User({
             username,
@@ -32,7 +30,7 @@ const addUser = async (req, res, next) => {
         })
         const createUser = await newUser.save();
         return res.status(201).json({
-            message: "create user successfull",
+            message: "Create user successfull",
             data: createUser // yeu cau in ra 1 user nen ops[0] 
         });
     } catch (e) {
