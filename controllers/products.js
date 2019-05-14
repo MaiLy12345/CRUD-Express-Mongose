@@ -66,7 +66,7 @@ const getProduct = async (req, res, next) => {
          const product = {...getProduct._doc};
         product.users = getUserOfProduct;
         return res.status(200).json({
-            message : 'Info Product of id : ' + id ,
+            message : 'Data : ' + id ,
             data : product
         });
     } catch (e) {
@@ -78,7 +78,7 @@ const getListProduct = async (req, res, next) => {
     try {
         const getProducts = await Product.find().lean();
         if (!getProducts) {
-            return next(new Error('NOT_DATA'));
+            return next(new Error('Not Data'));
         }
         const getUsers = await User.find().lean();
         const products = [...getProducts];
@@ -113,14 +113,11 @@ const updateProduct = async (req, res, next) => {
             isAvailable,
             payload
         } = req.body;
-        const existedUser = User.findOne({_id: ObjectId(userId)});
-        if (!existedUser) {
-            return next(new Error('UserId_does_not_exist'));
+        const user = await User.findOne({_id: ObjectId(userId)});        
+        if (!user) {
+            return next(new Error('User not found'));
         }
-        const existedProduct = Product.findOne({name});
-        if (!existedProduct) {
-            return next(new Error('Name_of_product_already_exist'));
-        }
+       
         const newValues = {
             name,
             userId,

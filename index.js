@@ -19,6 +19,7 @@ models
     //load route
 userRoute.load(app);
 productRoute.load(app);
+
 app.use(function (err, req, res, next) {
     console.log(JSON.stringify(err, null, 2));
     if (Array.isArray(err.errors)) {

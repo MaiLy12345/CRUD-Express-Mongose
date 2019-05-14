@@ -8,7 +8,7 @@ const condition = {
     isAvailable: Joi.boolean(),
     payload: Joi.object().keys({ 
         releasedAt: Joi.date(),
-        expiredAt: Joi.date().min('now').greater(Joi.ref('releasedAt')),   
+        expiredAt: Joi.date().min('now').greater(Joi.ref('releasedAt')),   //nho nhat la time hien tai, va lon hon releasedAt
        
     })
 };
