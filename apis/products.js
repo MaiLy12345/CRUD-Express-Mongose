@@ -1,7 +1,6 @@
 const productValidation = require('../validations/products.js');
 const productController = require('../controllers/products.js');
 const validate = require('express-validation');
-const mongoose = require('mongoose');
 
 
 exports.load = function(app) {
@@ -12,5 +11,3 @@ exports.load = function(app) {
     app.put('/api/v1/products/:id', validate(productValidation.updateProduct()), productController.updateProduct);
 };
 
-
-const model = ['name', 'price'];

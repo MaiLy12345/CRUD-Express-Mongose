@@ -3,8 +3,8 @@ const { mongoose }= require('./index.js');
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        min: 3,
-        max: 30,
+        min: 2,
+        max: 50,
         required: true,
         unique: true
     },
@@ -14,8 +14,8 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        min: 1000,
-        max: 100000000,
+        min: 100,
+        max: 999999,
         required: true
     },
     color: [{
@@ -29,7 +29,6 @@ const productSchema = new mongoose.Schema({
     payload: {
         releasedAt: {
             type: Date,
-            // min: ('now'),
             required: true
         },
         expiredAt: {

@@ -3,7 +3,7 @@ const Joi = require('joi');
 const condition = {
     name: Joi.string().alphanum().min(3).max(40),
     _id: Joi.string().regex(/^[0-9a-fA-F]{24}$/),
-    price: Joi.number().integer().min(1000).max(100000000),
+    price: Joi.number().integer().min(100).max(999999),
     color: Joi.array().items(Joi.string().alphanum().min(3).max(30)),
     isAvailable: Joi.boolean(),
     payload: Joi.object().keys({ 
@@ -26,13 +26,6 @@ const createProduct = () => {
     };
 }
 
-const deleteProduct = () => {
-    return {
-        params: {
-            id: condition._id.required()
-        }
-    };
-}
 
 const getProduct = () => {
     return {
@@ -58,6 +51,13 @@ const updateProduct = () => {
     };
 }
 
+const deleteProduct = () => {
+    return {
+        params: {
+            id: condition._id.required()
+        }
+    };
+}
 module.exports = {
     createProduct,
     deleteProduct,
